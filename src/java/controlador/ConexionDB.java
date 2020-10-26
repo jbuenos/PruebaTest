@@ -29,8 +29,4 @@ public class ConexionDB {
         return cn;
     }
     
-    Statement createStatement(){
-        throw new UnsupportedOperationException("No Soportado");
-    }
-    
 }

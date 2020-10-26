@@ -8,7 +8,9 @@ package vista;
 import controlador.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -105,6 +107,11 @@ public class Clientes extends javax.swing.JFrame {
         jLabelFechaConsulta.setToolTipText("");
 
         jButtonConsultar.setText("Consultar");
+        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarActionPerformed(evt);
+            }
+        });
 
         jButtonCrear.setText("Crear");
         jButtonCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -235,8 +242,17 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
+       
+        String id = jTextIdConsulta.getText();
+        String nombre = jTextNombreCreacion.getText();
+        String tel = jTextTelefonoCreacion.getText();
+        String fech = jTextFechaCreacion.getText();
         
-        try {
+        if(id.equals("") && nombre.equals("") && tel.equals("") && fech.equals("AAAA-MM-DD")){
+            JOptionPane.showMessageDialog(null, "Ningún campo puede estar en blanco!");
+        }else{
+            
+            try {
             PreparedStatement pps = cn.prepareStatement("INSERT INTO usuario (cod_usuario, nombre_usuario, telefono_usuario, fecha_registro) VALUES (?,?,?,?);");
             pps.setString(1, jTextIdCreacion.getText());
             pps.setString(2, jTextNombreCreacion.getText());
@@ -244,11 +260,44 @@ public class Clientes extends javax.swing.JFrame {
             pps.setString(4, jTextFechaCreacion.getText());
             pps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Usuario creado exitosamente!");
+            jTextIdCreacion.setText("");
+            jTextNombreCreacion.setText("");
+            jTextTelefonoCreacion.setText("");
+            jTextFechaCreacion.setText("");
+            
         } catch (SQLException ex) {
             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error intentando guardar el usuario");
+        }
+            
         }
         
     }//GEN-LAST:event_jButtonCrearActionPerformed
+
+    private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
+        try {
+            String id = jTextIdConsulta.getText();
+            String sql = "select * from usuario where cod_usuario="+id;
+            Statement s = cn.createStatement();
+            ResultSet rs = s.executeQuery (sql);
+            
+            if(rs != null){
+                while (rs.next()){
+                //System.out.println (rs.getInt (1) + " " + rs.getString (2)+ " " + rs.getDate(3));
+                jLabelNombreConsulta.setText(rs.getString(2));
+                jLabelTelefonoConsulta.setText(rs.getString(3));
+                jLabelFechaConsulta.setText(rs.getString(4));
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario no registrado");
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     /**
      * @param args the command line arguments
