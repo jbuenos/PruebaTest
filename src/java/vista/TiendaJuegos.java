@@ -32,6 +32,7 @@ public class TiendaJuegos extends javax.swing.JFrame {
         jButtonAlquileres = new javax.swing.JButton();
         jButtonJuegos = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -54,6 +55,11 @@ public class TiendaJuegos extends javax.swing.JFrame {
         });
 
         jButtonJuegos.setText("VideoJuegos");
+        jButtonJuegos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonJuegosActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Ver Alquileres");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,32 +73,42 @@ public class TiendaJuegos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(149, 149, 149))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAlquileres)
-                            .addComponent(jButtonClientes)
-                            .addComponent(jButtonJuegos)
-                            .addComponent(jButton1))))
-                .addGap(55, 55, 55))
+                        .addComponent(jButtonClientes)
+                        .addGap(35, 35, 35)
+                        .addComponent(jButtonAlquileres))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jButtonJuegos)))
+                .addGap(28, 28, 28)
+                .addComponent(jButton1)
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(7, 7, 7)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonClientes)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonAlquileres)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonClientes)
+                    .addComponent(jButtonAlquileres)
+                    .addComponent(jButton1))
+                .addGap(33, 33, 33)
                 .addComponent(jButtonJuegos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,6 +132,12 @@ public class TiendaJuegos extends javax.swing.JFrame {
         consul.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonJuegosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJuegosActionPerformed
+        ConsultaVideojuegos consulV = new ConsultaVideojuegos();
+        consulV.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonJuegosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,5 +180,6 @@ public class TiendaJuegos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonClientes;
     private javax.swing.JButton jButtonJuegos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
