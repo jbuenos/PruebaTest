@@ -275,8 +275,13 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCrearActionPerformed
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        try {
-            String id = jTextIdConsulta.getText();
+        
+        String id = jTextIdConsulta.getText();
+        
+        if(id.equals("")){
+            JOptionPane.showMessageDialog(null, "El id no puede estar en blanco");
+        }else{
+            try {
             String sql = "select * from usuario where cod_usuario="+id;
             Statement s = cn.createStatement();
             ResultSet rs = s.executeQuery (sql);
@@ -297,6 +302,10 @@ public class Clientes extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+        }
+        
+        
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     /**
