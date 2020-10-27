@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -26,9 +29,15 @@ public class ConsultaAlquileres extends javax.swing.JFrame {
     
     public void cargarAlquileres(){
         
+        Date myDate = new Date();
+        
+        String newDate = new SimpleDateFormat("yyyy/MM/dd").format(myDate);
+        
+        System.out.println(newDate);
+        
         Statement st;
         
-        String sql = "select titulo, nombre_usuario, valor_alquiler, fecha_compra, fecha_entrega from alquiler, usuario, videojuego where alquiler.cod_usuario = usuario.cod_usuario and alquiler.cod_videojuego = videojuego.cod_videojuego";
+        String sql = "select titulo, nombre_usuario, valor_alquiler, fecha_compra, fecha_entrega from alquiler, usuario, videojuego where alquiler.cod_usuario = usuario.cod_usuario and alquiler.cod_videojuego = videojuego.cod_videojuego and fecha_compra = '"+newDate+"'";
         
         DefaultTableModel model = new DefaultTableModel();
         
@@ -148,10 +157,13 @@ public class ConsultaAlquileres extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
+        
         cargarAlquileres();
+       
     }//GEN-LAST:event_CargarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
